@@ -95,20 +95,18 @@ function getObjectLength(obj) {
 
 // 判断是否为邮箱地址
 function isEmail(emailStr) {
-    var patt = /^(\w)+(\.\w)*@\w+\.\w+$/;
-    console.log(patt.exec(emailStr));
+    var patt = /^[\da-z]+([\.\-\_]?[\da-z]+)*\@[\da-z]+([\.\_\-]?[\da-z]+)*(\.[\da-z]+)+$/i;
+    var a = patt.test(emailStr);
+    var str = String(emailStr) + (a ? "是邮箱地址" : "不是邮箱地址");
+    console.log(str);
     return patt.test(emailStr);
 }
 
 // 判断是否为手机号
 function isMobilePhone(phone) {
-    // your implement
+    // 判断是否为手机号
 }
 
-var mail = "2_2@gmail.com";
+var mail = ",nima.heiheihei.heihei@yes.com.hk";
 
-//console.log(isEmail(mail));
-
-var patt=/^[\da-zA-Z]+([\.\_\-]?[\da-zA-Z]+)*\@/i;
-var str="123Aadf-sss-@"
-console.log(patt.exec(str));
+console.log(isEmail(mail));
