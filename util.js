@@ -33,7 +33,7 @@ function cloneObject(src) {
             break;
         case '[object Array]':
             obj = new Array();
-            for (var i = 0; i < src.length; i++) {
+            for (var i = 0, len = src.length; i < len; i++) {
                 obj.push(src[i]);
             }
             break;
@@ -46,35 +46,6 @@ function cloneObject(src) {
         return obj;
     }
 }
-/* 
-//使用if语句写的函数
-    if ((objType === '[object Number]')||(objType === '[object String]')||(objType === '[object Boolean]')||(objType === '[object Date]')){
-        var obj = src;
-        return obj;
-    }
- 
-    if (objType === '[object Object]'){
-        var obj = new Object();
-        for (var propName in src){
-            //用递归的方式判断src[proName]是什么类型的数据，然后再返回给新建的obj[propName]
-            //令propName="Name"，则Object[propName]就相当于Object.Name；这是一个用变量访问对象属性的方法
-            //错误的函数之一、我用obj.propName = src.propName做赋值，这样相当于把src的propName属性赋值给obj的probName属性
-            //错误的函数之二、我在for-in中写了obj[propName]=src[propName]，这样两者的propName属性公用一个内存地址，修改其中一个，另一个就会跟着变动
-            obj[propName] = cloneObject(src[propName]);          
-        }
-        return obj;
-    }
- 
- 
-    if (objType === '[object Array]'){
-        var obj = new Array();
-        for (var i=0;i<src.length;i++){
-            obj[i]=src[i];
-        }
-        return obj;
-    }
-*/
-
 
 // 对数组进行去重操作，只考虑数组中元素为数字或字符串，返回一个去重后的数组
 function uniqArray(arr) {
@@ -102,35 +73,42 @@ function uniqArray(arr) {
 // 假定空白字符只有半角空格、Tab
 // 练习通过循环，以及字符串的一些基本方法，分别扫描字符串str头部和尾部是否有连续的空白字符，并且删掉他们，最后返回一个完成去除的字符串
 function simpleTrim(str) {
-    return str;
+    var trimmer = /^[\s+]+|\s+$/g;
+    return str.replace(trimmer, "");
 }
-// 使用示例
 
-var text = "mom and dad and baby";
-var pattern = /mom( and dad( and baby)?)?/gi;
-var matches = pattern.exec(text);
-console.log(matches.index); // 0
-console.log(matches.input); // "mom and dad and baby"
-console.log(matches[0]); // "mom and dad and baby"
-console.log(matches[1]); // " and dad and baby"
-console.log(matches[2]); // " and baby"
-
-console.log(matches);
-
-
-var text = "cat, bat, sat, fat";
-var pattern1 = /.at/g;
-var arr = [];
-
-while (pattern1.lastIndex < text.length) {
-    var a = pattern1.exec(text);
-    arr=arr.concat(a);
-    console.log(a);
+// 实现一个遍历数组的方法，针对数组中每一个元素执行fn函数，并将数组索引和元素作为参数传递
+function each(arr, fn) {
+    for (var i = 0, len = arr.length; i < len; i++) {
+        fn(arr[i], i);
+    }
 }
-console.log(arr);
 
-var text = "000-00-0000";
-var pattern = /\d{3}-\d{2}-\d{4}/;
-if (pattern.test(text)){
-console.log("The pattern was matched.");
+// 获取一个对象里面第一层元素的数量，返回一个整数
+function getObjectLength(obj) {
+    var len = 0;
+    for (var i in obj) {
+        len++;
+    }
+    return len;
 }
+
+// 判断是否为邮箱地址
+function isEmail(emailStr) {
+    var patt = /^(\w)+(\.\w)*@\w+\.\w+$/;
+    console.log(patt.exec(emailStr));
+    return patt.test(emailStr);
+}
+
+// 判断是否为手机号
+function isMobilePhone(phone) {
+    // your implement
+}
+
+var mail = "2_2@gmail.com";
+
+//console.log(isEmail(mail));
+
+var patt=/^[\da-zA-Z]+([\.\_\-]?[\da-zA-Z]+)*\@/i;
+var str="123Aadf-sss-@"
+console.log(patt.exec(str));
