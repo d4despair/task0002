@@ -95,7 +95,7 @@ function getObjectLength(obj) {
 
 // 判断是否为邮箱地址
 function isEmail(emailStr) {
-    var patt = /^[\da-z]+([\.\-\_]?[\da-z]+)*\@[\da-z]+([\.\_\-]?[\da-z]+)*(\.[\da-z]+)+$/i;
+    var patt = /^[\da-z]+((\.?|[\-\_]+)?[\da-z]+)*\@[\da-z]+\.[\da-z]{3}(\.[a-z]{2})?$/i;
     var a = patt.test(emailStr);
     var str = String(emailStr) + (a ? "是邮箱地址" : "不是邮箱地址");
     console.log(str);
@@ -104,9 +104,38 @@ function isEmail(emailStr) {
 
 // 判断是否为手机号
 function isMobilePhone(phone) {
-    // 判断是否为手机号
+    return /^1[0-9]{10}$/.test(phone);
 }
 
-var mail = ",nima.heiheihei.heihei@yes.com.hk";
 
-console.log(isEmail(mail));
+function addClass(element, className) {
+    if (!hasClass(element, className)) {
+        element.className = element.className ? [element.className, className].join(' ') : className;
+    }
+}
+
+
+function hasClass(element, className) {
+    var classNames = element.className;
+    if (!classNames) {
+        return false;
+    }
+    classNames = classNames.split(/\s+/);
+    for (var i = 0, len = classNames.length; i < len; i++) {
+        if (classNames[i] === className) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+var pNode1 = document.getElementById("div1");
+var cNode1 = document.createElement("li");
+var tNode1 = document.createTextNode("hello world!");
+
+
+cNode1.appendChild(tNode1);
+pNode1.replaceChild(cNode1,pNode1.firstChild);
+
+pNode1.appendChild(pNode1.cloneNode(true)) ;
