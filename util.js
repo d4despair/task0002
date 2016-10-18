@@ -109,34 +109,51 @@ function isMobilePhone(phone) {
     return /^1[0-9]{10}$/.test(phone);
 }
 
-function addClass(element, className) {
-    if (!hasClass(element, className)) {
-        element.className = element.className ? [element.className, className].join(' ') : className;
-    }
-}
 
-
+//判断元素中是否已经存在某class
 function hasClass(element, className) {
     var classNames = element.className;
     if (!classNames) {
-        return false;
+        console.log("该元素还没有类");
+        return 0;
     }
     classNames = classNames.split(/\s+/);
-    for (var i = 0, len = classNames.length; i < len; i++) {
+    for (var i in classNames) {
         if (classNames[i] === className) {
-            return true;
+            console.log(className+"已存在");
+            return 1;
         }
     }
 
-    return false;
+    console.log("该元素存在其他类");
+    return -1;
 }
 
-var pNode1 = document.getElementById("div1");
-var cNode1 = document.createElement("li");
-var tNode1 = document.createTextNode("hello world!");
+// 为element增加一个样式名为newClassName的新样式
+function addClass(element, newClassName) {
+    if (!hasClass(element, newClassName)) {
+        element.ClassName = element.ClassName ? [element.className, newClassName].join(" ") : newClassName;
+        console.log("函数中"+element.ClassName);
+    }
+}
 
+// 移除element中的样式oldClassName
+function removeClass(element, oldClassName) {
+    if (hasClass(element, oldClassName)) {       
+        return console.log("removeClass：存在"+oldClassName+"，但是移除功能还没完成");
+    }
+    return console.log("removeClass：该元素不存在"+oldClassName+"，不需要移除");
+}
 
-cNode1.appendChild(tNode1);
-pNode1.replaceChild(cNode1,pNode1.firstChild);
+var b = "a ";
+b=b.replace("a","b");
+console.log(b);
 
-pNode1.appendChild(pNode1.cloneNode(true)) ;
+var a = document.getElementById("myDiv");
+/*
+console.log(hasClass(a, "tf"));
+console.log(a.className);
+console.log(addClass(a, "td"));
+console.log(a.className);*/
+
+removeClass(a, "td");

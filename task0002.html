@@ -8,17 +8,18 @@
 </head>
 
 <body>
-	<ol id="div1">
-		ggg
-	<li id="p1">This is a paragraph.</li>
-	<li id="p2">This is another paragraph.</li>
-	</ol>
-
-	<input id="email" type="text">
-	<button id="checkEmail" type="submit">确认</button> 该文档的标题是：
-	<script>document.write(document.title)
-	</script>
-
+	<fieldset>
+		<legend>Which color do you prefer?</legend>
+		<ul>
+			<li><input type="radio" value="red" name="color" id="colorRed">
+				<label for="colorRed">Red</label></li>
+			<li><input type="radio" value="green" name="color" id="colorGreen">
+				<label for="colorGreen">Green</label></li>
+			<li><input type="radio" value="blue" name="color" id="colorBlue">
+				<label for="colorBlue">Blue</label></li>
+		</ul>
+	</fieldset>
+	<div id="myDiv" class="bd tf" title="Body text" lang="en" dir="ltr">hello world!</div>
 	<script src="util.js" defer></script>
 	<!--以下三个方法能提高网站性能：将script标签写在</body>之前；使用defer属性，延迟加载脚本；尽量减少script标签数量。-->
 </body>
