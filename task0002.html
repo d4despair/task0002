@@ -4,6 +4,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>task0002</title>
+	<style>
+		.td {
+			color: red;
+		}
+		
+		.tf {
+			font-size: 20px;
+		}
+	</style>
 
 </head>
 
@@ -20,6 +29,32 @@
 		</ul>
 	</fieldset>
 	<div id="myDiv" class="bd tf" title="Body text" lang="en" dir="ltr">hello world!</div>
+	<div title="Body text" lang="en" dir="ltr">hello world!：我是参照系</div>
+
+	<div class="bd tf" title="Body text" lang="en" dir="ltr">
+		<p id="element1">element</p>
+		<p id="sibling1">sibling</p>
+	</div>
+
+	<div class="bd tf" title="Body text" lang="en" dir="ltr">
+		<p id="element2">element</p>
+		<p id="sibling2">sibling</p>
+	</div>
+
+	<div id="test1">
+		<p><span>1</span></p>
+		<p><span>1</span></p>
+	</div>
+	<div id="adom">
+		adom
+	</div>
+
+	<a id="a1">a1</a>
+
+	<a id="a1" class="classa">a1</a>
+
+
+
 	<script src="util.js" defer></script>
 	<!--以下三个方法能提高网站性能：将script标签写在</body>之前；使用defer属性，延迟加载脚本；尽量减少script标签数量。-->
 </body>

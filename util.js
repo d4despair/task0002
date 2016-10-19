@@ -114,46 +114,109 @@ function isMobilePhone(phone) {
 function hasClass(element, className) {
     var classNames = element.className;
     if (!classNames) {
-        console.log("该元素还没有类");
-        return 0;
+        return 0;//不存在任何类，返回数值0
     }
     classNames = classNames.split(/\s+/);
     for (var i in classNames) {
         if (classNames[i] === className) {
-            console.log(className+"已存在");
-            return 1;
+            return 1;//已存在参数中的类，返回数值1
         }
     }
-
-    console.log("该元素存在其他类");
-    return -1;
+    return -1;//不存在参数中的类，但是存在其他类，返回数值-1
 }
 
 // 为element增加一个样式名为newClassName的新样式
 function addClass(element, newClassName) {
-    if (!hasClass(element, newClassName)) {
-        element.ClassName = element.ClassName ? [element.className, newClassName].join(" ") : newClassName;
-        console.log("函数中"+element.ClassName);
+    //只有当返回值小于等于0时才添加新的类，即元素中不存在即将添加的类时
+    if (hasClass(element, newClassName) <= 0) {
+        //element.className为真时，element中存在其他类；为假时，不存在任何类
+        element.className = element.className ? [element.className, newClassName].join(" ") : newClassName;
+        return true;
     }
+    return false;
 }
 
 // 移除element中的样式oldClassName
 function removeClass(element, oldClassName) {
-    if (hasClass(element, oldClassName)) {       
-        return console.log("removeClass：存在"+oldClassName+"，但是移除功能还没完成");
+    if (hasClass(element, oldClassName) === 1) {
+        var patt = new RegExp("\\s*" + oldClassName + "\\s*", "g");//用变量形式创建正则表达式，等价于/\s*要删除的类\s*/g
+        element.className = element.className.replace(patt, " "); //移除已存在的类
+        element.className = element.className.replace(/^\s+|\s+$/, ""); //删除字符串头尾空格，没有这个语句整个函数也没有影响
+        return true;
     }
-    return console.log("removeClass：该元素不存在"+oldClassName+"，不需要移除");
+    return false;
 }
 
-var b = "a ";
-b=b.replace("a","b");
-console.log(b);
+/**
+ *  <div id="test1">
+		<p>element<span>1</span></p>  //firstChild
+		<p>element<span>1</span></p>  //lastChild
+	</div>
+----------------------------------------
+    var d1 = document.getElementById("test1").firstChild.firstChild;
+    var d2 = document.getElementById("test1").lastChild.firstChild;
+    console.log(d1==d2); // true
+ * ----------------------------------
+ * 以下函数存在漏洞，不能解决如上的问题：d1是firstChild的span元素，d2是lastChild的span元素，但是两者相等
+ * function isSiblingNode(element, siblingNode) {
+    if (element.parentNode == siblingNode.parentNode) {
+        return true;
+    }
+    return false;
+}
 
-var a = document.getElementById("myDiv");
-/*
-console.log(hasClass(a, "tf"));
-console.log(a.className);
-console.log(addClass(a, "td"));
-console.log(a.className);*/
+ */
+// note：element.childNodes与 element.children的区别
+// 用childNodes属性会把父元素中的textNode也算进去（包括空格），使用children的话，只会考虑elementNode
+function isSiblingNode(element, siblingNode) {
+    for (var node = element.parentNode.firstChild; node; node = node.nextSibling) {
+        if (node === siblingNode) {
+            return true;
+        }
+    }
+    return false;
+}
 
-removeClass(a, "td");
+// 获取element相对于浏览器窗口的位置，返回一个对象{x, y}
+function getPosition(element) {
+    var x = element.offsetLeft;
+    var y = element.offsetTop;
+    return { x, y };
+}
+function getPosition2(element) {
+    var box = element.getBoundingClientRect();
+    return box;
+}
+
+// 实现一个简单的Query
+function $(selector) {
+    var selectors = selector.split(/\s+/);
+    console.log(selectors);
+    for (var i in selectors) {
+        console.log(selectors[i]);
+        if (/^#\w+/.test(selectors[i])) {
+            var idSelector = selectors[i].replace("#", "");
+            var element = document.getElementById(idSelector);
+            console.log(element);
+        }
+        if (/^\w+/.test(selectors[i])){
+            var tagName = selectors[i];
+            var element = document.getElementsByTagName(tagName)[0];
+            console.log(element);
+        }
+
+        if (/^\.\w+/.test(selectors[i])){
+            var className = selectors[i].replace(".", "");
+            var element = document.getElementsByClassName(className)[0];
+            console.log(element);
+        }
+
+
+    }
+
+
+}
+
+// 可以通过id获取DOM对象，通过#标示，例如
+console.log($("#adom .classa")); // 返回id为adom的DOM对象
+console.log($("div"));
