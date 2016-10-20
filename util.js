@@ -199,13 +199,13 @@ function $(selector) {
             var element = document.getElementById(idSelector);
             console.log(element);
         }
-        if (/^\w+/.test(selectors[i])){
+        if (/^\w+/.test(selectors[i])) {
             var tagName = selectors[i];
             var element = document.getElementsByTagName(tagName)[0];
             console.log(element);
         }
 
-        if (/^\.\w+/.test(selectors[i])){
+        if (/^\.\w+/.test(selectors[i])) {
             var className = selectors[i].replace(".", "");
             var element = document.getElementsByClassName(className)[0];
             console.log(element);
@@ -220,3 +220,21 @@ function $(selector) {
 // 可以通过id获取DOM对象，通过#标示，例如
 console.log($("#adom .classa")); // 返回id为adom的DOM对象
 console.log($("div"));
+
+function outputNumbers(count){
+for (var i=0; i < count; ++i){
+alert(i);
+}
+alert(i+1); //计数
+}
+
+outputNumbers(3);
+
+var aqiData = [
+  ["北京", 90],
+  ["上海", 50],
+  ["福州", 10],
+  ["广州", 50],
+  ["成都", 90],
+  ["西安", 100]
+];
