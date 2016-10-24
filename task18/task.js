@@ -12,82 +12,69 @@ function addEventHandler(element, event, handler) {
     }
 }
 
-function inputTextCheck(element) {
-    var text = $("input-text").value;
-    if (text && text.match(/^\d+$/)) {
-        element.dataset.block = $("input-text").value;
-        element.innerHTML = $("input-text").value;
-        element.className = "num-block";
-        return true;
-    } else {
-        alert("请输入数字");
-        return false;
-    }
-}
-
-
-function addBlock(id) {
-    if (id === "input-left-in") {
-        var numBlock = document.createElement("DIV");
-        var text = $("input-text").value;
-        if (text && text.match(/^\d+$/)) {
-            numBlock.dataset.block = $("input-text").value;
-            numBlock.innerHTML = $("input-text").value;
-            numBlock.className = "num-block";
-        } else {
-            alert("请输入数字");
-            return;
-        }
-        $("num-block-warp").insertBefore(numBlock, $("num-block-warp").firstChild);
-
-    }
-    if (id === "input-right-in") {
-        var numBlock = document.createElement("DIV");
-        var text = $("input-text").value;
-        if (text && text.match(/^\d+$/)) {
-            numBlock.dataset.block = $("input-text").value;
-            numBlock.innerHTML = $("input-text").value;
-            numBlock.className = "num-block";
-        } else {
-            alert("请输入数字");
-            return;
-        }
-        $("num-block-warp").appendChild(numBlock);
-    }
-
-}
-function removeBlock(id) {
-    if (id=="input-text"){
-        return;
-    }
-
-    if (id === "input-left-out") {
-        $("num-block-warp").removeChild($("num-block-warp").firstElementChild);
-    }else
-    if (id === "input-right-out") {
-        $("num-block-warp").removeChild($("num-block-warp").lastElementChild);
-    }else {
-        id.remove();
-    }
+window.onload = function () {
     
-}
+    var queue = {
 
-function initAddBlock() {
-    addEventHandler($("input-form"), "click", function (event) {
-        addBlock.call(event, event.target.id);
-    });
-}
+        str: [],
 
-function initRemoveBlock() {
+        leftPush: function (num) {
+            if (/^\d+$/.test(num)) {
+                this.str.unshift(num);
+                this.paint();
+            } else {
+                alert("please enter an interger");
+            }
+        },
+
+        rightPush: function (num) {
+            if (/^\d+$/.test(num)) {
+                this.str.push(num);
+                this.paint();
+            } else {
+                alert("please enter an interger");
+            }
+        },
+
+        leftPop: function () {
+            alert(this.str.splice(0, 1));
+            this.paint();
+        },
+
+        rightPop: function () {
+            alert(this.str.pop());
+            this.paint();
+        },
+
+        deleteDiv: function (arr) {
+            alert(this.str.splice(arr, 1));
+            this.paint();
+        },
+
+        paint: function () {
+            var str = "";
+            for (var i = 0, len = this.str.length; i < len; i++) {
+                str += "<div class='num-block' data-arr=" + i + ">" + this.str[i] + "</div>";
+            }
+            $("num-block-warp").innerHTML = str;
+        }
+
+    }
+
     addEventHandler($("input-form"), "click", function (event) {
-        removeBlock.call(event, event.target.id);
+        switch (event.target.id) {
+            case "left-push": queue.leftPush($("text").value);
+                break;
+            case "right-push": queue.rightPush($("text").value);
+                break;
+            case "left-pop": queue.leftPop();
+                break;
+            case "right-pop": queue.rightPop();
+                break;
+        }
     });
+
     addEventHandler($("num-block-warp"), "click", function (event) {
-        removeBlock.call(event, event.target);
+        queue.deleteDiv(parseInt(event.target.dataset.arr));
     });
 }
-
-console.log("hello world");
-
-initAddBlock();
-initRemoveBlock();
