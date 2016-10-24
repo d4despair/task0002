@@ -6,16 +6,23 @@
 	<title>IFE JavaScript Task 19</title>
 	<style>
 		.num-block {
-			float: left;
 			color: #fff;
 			background: #000;
-			padding: 5px;
-			margin: 2px;
+			width: 15px;
+			margin: 1px;
 		}
 		
 		.num-block:hover {
 			opacity: 0.7;
-            cursor:pointer;
+			cursor: pointer;
+		}
+		
+		#num-block-warp {
+			display: flex;
+			height: 110px;
+			background: #eee;
+			align-items: flex-end;
+			padding: 2px;
 		}
 	</style>
 </head>
@@ -27,6 +34,8 @@
 		<input id="right-push" type="button" value="右侧入">
 		<input id="left-pop" type="button" value="左侧出">
 		<input id="right-pop" type="button" value="右侧出">
+		<input id="random" type="button" value="随机数">
+		<span id="deleted"></span>
 	</form>
 	<div id="num-block-warp"></div>
 	<script src="task.js"></script>

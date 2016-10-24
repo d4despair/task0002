@@ -12,6 +12,14 @@ function addEventHandler(element, event, handler) {
     }
 }
 
+
+/**
+ * 产生50个10到100的随机数
+ */
+function randomBuilt() {
+
+}
+
 window.onload = function () {
 
     var queue = {
@@ -20,42 +28,49 @@ window.onload = function () {
 
         leftPush: function (num) {
             if (this.overLimit()) {
-                alert("排列数量超过最大限制");
+                $("deleted").innerHTML = "排列数量超过最大限制";
             } else if (this.inputCheck(num)) {
                 this.str.unshift(num);
                 this.paint();
             } else {
-                alert("请输入一个[10-100]的整数");
+                $("deleted").innerHTML = "请输入一个[10-100]的整数";
             }
         },
 
         rightPush: function (num) {
             if (this.overLimit()) {
-                alert("排列数量超过最大限制");
+                $("deleted").innerHTML = "排列数量超过最大限制";
             } else if (this.inputCheck(num)) {
                 this.str.push(num);
                 this.paint();
             } else {
-                alert("请输入一个[10-100]的整数");
+                $("deleted").innerHTML = "请输入一个[10-100]的整数";
             }
         },
 
         leftPop: function () {
-            if (!this.isEmpty) {
-                alert(this.str.splice(0, 1));
+            if (!this.isEmpty()) {
+                $("deleted").innerHTML = this.str.splice(0, 1);
                 this.paint();
             }
         },
 
         rightPop: function () {
-            if (!this.isEmpty) {
-                alert(this.str.pop());
+            if (!this.isEmpty()) {
+                $("deleted").innerHTML = this.str.pop();
                 this.paint();
             }
         },
+        random: function () {
+            this.str = [];
+            for (var i = 0; i < 50; i++) {
+                this.str[i] = Math.ceil(Math.random() * 90) + 10;
+            }
+            this.paint();
+        },
 
         isEmpty: function () {
-            return this.str.length == 0;
+            return (this.str.length == 0);
         },
 
         inputCheck: function (num) {
@@ -69,14 +84,14 @@ window.onload = function () {
         ,
 
         deleteDiv: function (arr) {
-            alert(this.str.splice(arr, 1));
+            $("deleted").innerHTML = this.str.splice(arr, 1);
             this.paint();
         },
 
         paint: function () {
             var str = "";
             for (var i = 0, len = this.str.length; i < len; i++) {
-                str += "<div class='num-block' data-arr=" + i + ">" + this.str[i] + "</div>";
+                str += "<div class='num-block' data-arr=" + i + " title=" + this.str[i] + " style='height:" + this.str[i] + "'></div>";
             }
             $("num-block-warp").innerHTML = str;
         }
@@ -93,10 +108,14 @@ window.onload = function () {
                 break;
             case "right-pop": queue.rightPop();
                 break;
+            case "random": queue.random();
+                break;
+            default: return;
         }
     });
 
     addEventHandler($("num-block-warp"), "click", function (event) {
-        queue.deleteDiv(parseInt(event.target.dataset.arr));
+        var dataset = event.target.dataset.arr;
+        if (!isNaN(dataset)) { queue.deleteDiv(parseInt(dataset)); }
     });
 }
