@@ -13,13 +13,6 @@ function addEventHandler(element, event, handler) {
 }
 
 
-/**
- * 产生50个10到100的随机数
- */
-function randomBuilt() {
-
-}
-
 window.onload = function () {
 
     var queue = {
@@ -80,12 +73,26 @@ window.onload = function () {
 
         overLimit: function () {
             return (this.str.length >= 60);
-        }
-        ,
+        },
 
         deleteDiv: function (arr) {
             $("deleted").innerHTML = this.str.splice(arr, 1);
             this.paint();
+        },
+        bubble: function () {
+            for (var i = 0; i < this.str.length; i++) {
+                for (var j = i + 1; j < this.str.length; j++) {
+                    if (this.str[i] > this.str[i + 1]) {
+                        var x = this.str[i + 1];
+                        this.str[i + 1] = this.str[i];
+                        this.str[i] = x;
+                        this.paint();
+                        this.bubble();
+                    }
+                    
+                }
+            }
+            
         },
 
         paint: function () {
@@ -109,6 +116,8 @@ window.onload = function () {
             case "right-pop": queue.rightPop();
                 break;
             case "random": queue.random();
+                break;
+            case "bubble": queue.bubble();
                 break;
             default: return;
         }
