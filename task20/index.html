@@ -3,40 +3,46 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>IFE JavaScript Task 19</title>
+	<title>IFE JavaScript Task 20</title>
 	<style>
 		.num-block {
 			color: #fff;
 			background: #000;
-			width: 15px;
-			margin: 1px;
+			padding: 5px;
+			margin: 2px;
 		}
 		
 		.num-block:hover {
 			opacity: 0.7;
 			cursor: pointer;
 		}
-		
-		#num-block-warp {
-			display: flex;
-			height: 110px;
-			background: #eee;
-			align-items: flex-end;
-			padding: 2px;
+
+		#num-block-warp{
+			display:flex;
 		}
+		
+		#text {
+			width: 200px;
+			height: 50px;
+			resize: none;
+		}
+
+		span{
+			background:#0cc;
+		}
+
 	</style>
 </head>
 
 <body>
 	<form id="input-form">
-		<input id="text" type="text">
+		<textarea id="text" placeholder="请输入字符并用不同符号分隔"></textarea>
 		<input id="left-push" type="button" value="左侧入">
 		<input id="right-push" type="button" value="右侧入">
 		<input id="left-pop" type="button" value="左侧出">
 		<input id="right-pop" type="button" value="右侧出">
-		<input id="random" type="button" value="随机数">
-		<input id="bubble" type="button" value="冒泡">
-		<span id="deleted"></span>
+		<input id="search-text" type="text" value="">
+		<input id="search" type="button" value="查询">
 	</form>
 	<div id="num-block-warp"></div>
 	<script src="task.js"></script>
