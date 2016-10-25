@@ -1,17 +1,59 @@
 <!DOCTYPE>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>爱无悔</title>
-    </head>
-    <body>
-        <form id="from">
-            <textarea id="text" placeholder="请输入关键字并用各种符号隔开"></textarea>
-            <input id="insert" type="button" value="插入">
-            <input id="delete" type="button" value="删除">
-            <input id="searchText" type="text" placeholder="输出查询的值">
-            <input id="search" type="button" value="查询">
-        </form>
-        <div id="tagList"></div>
-    </body>
+
+<head>
+	<meta charset="utf-8">
+	<title>爱无悔</title>
+	<style>
+		.list {
+			display: flex;
+		}
+		
+		.list div {
+			background: #000;
+			color: #fff;
+			margin: 2px;
+			padding: 2px;
+            animation: myfirst 2s easyin;
+		}
+		
+		@-webkit-keyframes myfirst
+		/* Safari 和 Chrome */
+		{
+			from {
+				width: 0;
+			}
+			to {}
+		}
+		
+		#hobby-input {
+			display: block;
+			margin-bottom: 10px;
+		}
+		
+		h2 {
+			font-size: 16px;
+		}
+	</style>
+</head>
+
+<body>
+	<form id="tag-warp">
+		<h2>tag</h2>
+		<input id="tag-input" class="list" type="text">
+	</form>
+	<div id="tag-list"></div>
+
+	<form id="hobby-warp">
+		<h2>兴趣爱好</h2>
+		<textarea id="hobby-input" placeholder="请输入关键字并用各种符号隔开"></textarea>
+		<input id="insert" type="button" value="插入">
+		<input id="delete" type="button" value="删除">
+	</form>
+	<div id="hobby-list" class="list"></div>
+
+	<script src="task21.js"></script>
+
+</body>
+
 </html>

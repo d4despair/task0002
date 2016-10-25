@@ -12,10 +12,6 @@ function addEventHandler(element, event, handler) {
     }
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d42f27a748a1c9b6df7bfc887b1135540b3e82ae
 window.onload = function () {
 
     var queue = {
@@ -134,9 +130,6 @@ window.onload = function () {
                 break;
             case "random": queue.random();
                 break;
-<<<<<<< HEAD
-            case "bubble": queue.bubble();
-=======
             case "bubble": {
                 var Clock;
                 var count = 0, i = 0;
@@ -158,7 +151,6 @@ window.onload = function () {
                     i++;
                 }, 100);
             }
->>>>>>> d42f27a748a1c9b6df7bfc887b1135540b3e82ae
                 break;
             default: return;
         }
