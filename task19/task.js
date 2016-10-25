@@ -12,7 +12,10 @@ function addEventHandler(element, event, handler) {
     }
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d42f27a748a1c9b6df7bfc887b1135540b3e82ae
 window.onload = function () {
 
     var queue = {
@@ -60,6 +63,20 @@ window.onload = function () {
                 this.str[i] = Math.ceil(Math.random() * 90) + 10;
             }
             this.paint();
+        },
+
+        bubble: function () {
+
+            for (var i = 1; i < this.str.length; i++) {
+                if (this.str[i - 1] > this.str[i]) {
+                    var temp = this.str[i];
+                    this.str[i] = this.str[i - 1];
+                    this.str[i - 1] = temp;
+                    this.flag = 1;
+                }
+            }
+            this.paint();
+            if (flag == 0) window.clearInterval(window.setInterval(queue.bubble(), 50));
         },
 
         isEmpty: function () {
@@ -117,7 +134,31 @@ window.onload = function () {
                 break;
             case "random": queue.random();
                 break;
+<<<<<<< HEAD
             case "bubble": queue.bubble();
+=======
+            case "bubble": {
+                var Clock;
+                var count = 0, i = 0;
+                console.log(queue.str.length)
+                Clock = setInterval(function () {
+                    if (count >= queue.str.length) {
+                        clearInterval(Clock);
+                    }
+                    if (i == queue.str.length - 1 - count) {
+                        i = 0;
+                        count++;
+                    }
+                    if (queue.str[i] > queue.str[i + 1]) {
+                        var temp = queue.str[i];
+                        queue.str[i] = queue.str[i + 1];
+                        queue.str[i + 1] = temp;
+                        queue.paint();
+                    }
+                    i++;
+                }, 100);
+            }
+>>>>>>> d42f27a748a1c9b6df7bfc887b1135540b3e82ae
                 break;
             default: return;
         }
