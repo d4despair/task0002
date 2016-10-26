@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Hybrid Pattern Example</title>
+
+</head>
+
+<body>
+	<input id="tag-input" type="text" value="ceshi">
+	<input id="tag-button" type="button" value="确认输入兴趣爱好">
+	<div id="tag-output"></div>
+	<textarea id="hobby-input"></textarea>
+	<input id="hobby-button" type="button" value="确认输入兴趣爱好">
+	<div id="hobby-output"></div>
+	<script type="text/javascript">
+    function $(id) {
+    return document.getElementById(id);
+}
+        function Tag (input, output,button){
+            this.input = $(input);
+            this.output = $(output);
+            this.button = $(button);
+            this.dataArr = [];   
+        }
+        
+        Tag.prototype = {
+            sayInput : function(){
+                console.log(this.input);
+            },
+deleteHandler:function (str,self) {
+    self.dataArr = self.dataArr.filter(function (e) {
+        return !str.match(new RegExp(e));
+    });
+    self.render();
+}
+            ,
+            render:function(self){
+               
+self.output.innerHTML = self.dataArr.map(function (item) {
+        return "<div>" + item + "</div>";
+    }).join(" ");
+            },
+            init:function(){
+                var self = this;
+         self.button.addEventListener("click",function(){
+             var str = self.input.value.trim();
+    if (str.length > 0) {
+        self.dataArr = self.dataArr.concat(str.split(/[^0-9a-z\u4E00-\u9FA5]+/i));
+
+        //数列去重
+        self.dataArr.forEach(function (e) {
+            while (self.dataArr.indexOf(e) !== self.dataArr.lastIndexOf(e)) {
+                self.dataArr.splice(self.dataArr.lastIndexOf(e), 1);
+            }
+        });
+
+        if (self.dataArr.length > 10) {
+            self.dataArr.splice(0, self.dataArr.length - 10);
+        }
+    }
+    console.log(self.dataArr);
+    self.render(self);
+    self.input.value = "";
+         },false);
+
+         self.output.addEventListener("click",function(event){
+            
+            var str = event.target.innerText.trim();
+            self.dataArr = self.dataArr.filter(function (e) {
+        return !str.match(new RegExp(e));
+    });
+    self.render(self);
+         });
+
+         }
+        };
+        
+        var person1 = new Tag("tag-input","tag-output","tag-button");
+        var person2 = new Tag("hobby-input","hobby-output","hobby-button");
+
+person1.init();
+person2.init();
+        
+    </script>
+</body>
+
+</html>
