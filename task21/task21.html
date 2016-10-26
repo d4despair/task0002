@@ -14,16 +14,6 @@
 			color: #fff;
 			margin: 2px;
 			padding: 2px;
-            animation: myfirst 2s easyin;
-		}
-		
-		@-webkit-keyframes myfirst
-		/* Safari 和 Chrome */
-		{
-			from {
-				width: 0;
-			}
-			to {}
 		}
 		
 		#hobby-input {
@@ -38,17 +28,15 @@
 </head>
 
 <body>
-	<form id="tag-warp">
-		<h2>tag</h2>
-		<input id="tag-input" class="list" type="text">
-	</form>
-	<div id="tag-list"></div>
+
+	<h2>tag</h2>
+	<input id="tag-input" type="text" placeholder="tag">
+	<div id="tag-list" class="list"></div>
 
 	<form id="hobby-warp">
 		<h2>兴趣爱好</h2>
 		<textarea id="hobby-input" placeholder="请输入关键字并用各种符号隔开"></textarea>
 		<input id="insert" type="button" value="插入">
-		<input id="delete" type="button" value="删除">
 	</form>
 	<div id="hobby-list" class="list"></div>
 
