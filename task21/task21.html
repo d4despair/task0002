@@ -5,17 +5,19 @@
 	<meta charset="utf-8">
 	<title>爱无悔</title>
 	<style>
-		.list {
+		.output {
 			display: flex;
 		}
 		
-		.list div {
+		.output div {
 			background: #000;
 			color: #fff;
 			margin: 2px;
-			padding: 2px;
+			padding: 10px;
 		}
-		
+		.output div:hover{
+			cursor:pointer;
+		}
 		#hobby-input {
 			display: block;
 			margin-bottom: 10px;
@@ -29,16 +31,11 @@
 
 <body>
 
-	<h2>tag</h2>
-	<input id="tag-input" type="text" placeholder="tag">
-	<div id="tag-list" class="list"></div>
-
-	<form id="hobby-warp">
-		<h2>兴趣爱好</h2>
-		<textarea id="hobby-input" placeholder="请输入关键字并用各种符号隔开"></textarea>
-		<input id="insert" type="button" value="插入">
-	</form>
-	<div id="hobby-list" class="list"></div>
+	<input id="tag-input" type="text" value="ceshi">
+	<div id="tag-output" class="output"></div>
+	<textarea id="hobby-input"></textarea>
+	<input id="hobby-button" type="button" value="确认输入兴趣爱好">
+	<div id="hobby-output" class="output"></div>
 
 	<script src="task21.js"></script>
 

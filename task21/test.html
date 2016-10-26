@@ -9,7 +9,6 @@
 
 <body>
 	<input id="tag-input" type="text" value="ceshi">
-	<input id="tag-button" type="button" value="确认输入兴趣爱好">
 	<div id="tag-output"></div>
 	<textarea id="hobby-input"></textarea>
 	<input id="hobby-button" type="button" value="确认输入兴趣爱好">
@@ -33,7 +32,7 @@ deleteHandler:function (str,self) {
     self.dataArr = self.dataArr.filter(function (e) {
         return !str.match(new RegExp(e));
     });
-    self.render();
+    self.render(self);
 }
             ,
             render:function(self){
