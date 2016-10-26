@@ -12,7 +12,7 @@ Tag.prototype = {
     deleteHandler: function (e) {
         var str = e;
         this.dataArr = this.dataArr.filter(function (e) {
-            return !str.match(new RegExp(e));
+            return !str.match(new RegExp("^"+e+"$"));
         });
     },
     insertHandler: function (self) {
