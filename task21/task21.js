@@ -23,25 +23,12 @@ function insertHandler() {
     if (hobby.length > 0) {
         dataArr = dataArr.concat(hobby.split(/[^0-9a-z\u4E00-\u9FA5]+/i));
 
-        /**
-         * 数列去重，这个函数只能去掉两个重复的，多个就不行
-         */
-        (function () {
-            dataArr.forEach(function (e) {
-                if (dataArr.indexOf(e) < dataArr.lastIndexOf(e)) {
-                    dataArr[dataArr.lastIndexOf(e)] = "";
-                }
-                if (dataArr.indexOf(e) < dataArr.lastIndexOf(e)) {
-                    dataArr[dataArr.indexOf(e)] = "";
-                }
-            });
-
-            dataArr = dataArr.filter(function (e) {
-                return e.length > 0;
-            });
-        } ());
-
-        console.log(dataArr);
+        //数列去重
+        dataArr.forEach(function (e) {
+            while (dataArr.indexOf(e) !== dataArr.lastIndexOf(e)) {
+                    dataArr.splice(dataArr.lastIndexOf(e), 1);
+            }
+        });
 
         if (dataArr.length > 10) {
             dataArr.splice(0, dataArr.length - 10);
@@ -49,6 +36,7 @@ function insertHandler() {
     }
     render();
 }
+
 
 /**
  * 删除点击的tag
