@@ -15,12 +15,33 @@ function addEventHandler(element, event, handler) {
 
 var dataArr = [];
 
-function insert() {
+/**
+ * 插入tag，调用渲染
+ */
+function insertHandler() {
     var hobby = $("hobby-input").value.trim();
     if (hobby.length > 0) {
         dataArr = dataArr.concat(hobby.split(/[^0-9a-z\u4E00-\u9FA5]+/i));
 
-        dataArr = dataArr.filter(function (e, i, a) {});//去重待完成
+        /**
+         * 数列去重，这个函数只能去掉两个重复的，多个就不行
+         */
+        (function () {
+            dataArr.forEach(function (e) {
+                if (dataArr.indexOf(e) < dataArr.lastIndexOf(e)) {
+                    dataArr[dataArr.lastIndexOf(e)] = "";
+                }
+                if (dataArr.indexOf(e) < dataArr.lastIndexOf(e)) {
+                    dataArr[dataArr.indexOf(e)] = "";
+                }
+            });
+
+            dataArr = dataArr.filter(function (e) {
+                return e.length > 0;
+            });
+        } ());
+
+        console.log(dataArr);
 
         if (dataArr.length > 10) {
             dataArr.splice(0, dataArr.length - 10);
@@ -29,7 +50,10 @@ function insert() {
     render();
 }
 
-function deleteList(str) {
+/**
+ * 删除点击的tag
+ */
+function deleteHandler(str) {
     dataArr = dataArr.filter(function (e) {
         return !str.match(new RegExp(e));
     });
@@ -44,15 +68,19 @@ function showDelete(ele) {
     }
 }
 
+/**
+ * 渲染html
+ */
 function render() {
     $("hobby-list").innerHTML = dataArr.map(function (item) {
         return "<div>" + item + "</div>";
     }).join(" ");
 }
 
-addEventHandler($("insert"), "click", insert);
+addEventHandler($("insert"), "click", insertHandler);
+
 addEventHandler($("hobby-list"), "click", function (event) {
-    deleteList.call(this, event.target.innerText.trim());
+    deleteHandler.call(this, event.target.innerText.trim());
 });
 /*
 addEventHandler($("hobby-list"), "mouseover", function (event) {
