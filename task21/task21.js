@@ -12,29 +12,30 @@ Tag.prototype = {
     deleteHandler: function (e) {
         var str = e;
         this.dataArr = this.dataArr.filter(function (e) {
-            return !str.match(new RegExp("^"+e+"$"));
+            return !str.match(new RegExp("^" + e + "$"));
         });
     },
     insertHandler: function (self) {
         var str = self.input.value.trim();
-        if (str.length > 0) {
-            var type = this.button ? "button" : "keyboard";
-            if (type == "button") {
+        var type = this.button ? "button" : "keyboard";
+        if (type == "button") {
+            if (str.length > 0) {
                 self.dataArr = self.dataArr.concat(str.split(/[^0-9a-z\u4E00-\u9FA5]+/i));
-            } else {
+            }
+        } else {
+            var str = this.input.value.match(/(^[^,\， ]*)/)[0];
+            if (str.length > 0) {
                 self.dataArr.push(str);
-                self.input.value = "";
-                console.log(self.dataArr);
             }
-            //数列去重
-            self.dataArr.forEach(function (e) {
-                while (self.dataArr.indexOf(e) !== self.dataArr.lastIndexOf(e)) {
-                    self.dataArr.splice(self.dataArr.lastIndexOf(e), 1);
-                }
-            });
-            if (self.dataArr.length > 10) {
-                self.dataArr.splice(0, self.dataArr.length - 10);
+        }
+        //数列去重
+        self.dataArr.forEach(function (e) {
+            while (self.dataArr.indexOf(e) !== self.dataArr.lastIndexOf(e)) {
+                self.dataArr.splice(self.dataArr.lastIndexOf(e), 1);
             }
+        });
+        if (self.dataArr.length > 10) {
+            self.dataArr.splice(0, self.dataArr.length - 10);
         }
     },
     render: function (self) {
@@ -44,6 +45,21 @@ Tag.prototype = {
     },
     init: function () {
         var self = this;
+        self.output.addEventListener("mouseover", function (event) {
+            console.log(event.target.id);
+            if (event.target.id == "") {
+                setTimeout(function () {
+                    event.target.innerHTML = "点击删除：" + event.target.innerHTML;
+                },50)
+            }
+        });
+
+        self.output.addEventListener("mouseout", function (event) {
+            setTimeout(function () {
+                event.target.innerHTML = event.target.innerHTML.replace(/点击删除：/, "");
+            }, 50);
+
+        });
         self.output.addEventListener("click", function (event) {
             self.deleteHandler(event.target.innerText.trim());
             self.render(self);
@@ -51,10 +67,11 @@ Tag.prototype = {
         var type = this.button ? "button" : "keyboard";
         switch (type) {
             case "keyboard":
-                self.input.addEventListener("keydown", function (event) {
+                self.input.addEventListener("keyup", function (event) {
                     var code = event.keyCode;
                     console.log(code);
-                    if (/(,| |\，)$/.test(self.input.value) || event.keyCode === 13) {
+                    console.log(self.input.value)
+                    if (/[,，;；、\s\n]+/.test(self.input.value) || event.keyCode === 13) {
                         self.insertHandler(self);
                         self.render(self);
                         self.input.value = "";
