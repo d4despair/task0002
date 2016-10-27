@@ -11,14 +11,18 @@
 			margin: 20px;
 			padding: 10px;
 			border: 1px solid #000;
-            justify-content:center;
+			justify-content: center;
+			background-color: #fff;
 		}
-
-        #a{
-            width:980px;
-            margin:0 auto;
-        }
-        
+		
+		#a {
+			width: 980px;
+			margin: 0 auto;
+		}
+		
+		.travesed {
+			background: #000;
+		}
 	</style>
 </head>
 
@@ -68,8 +72,85 @@
 			</div>
 		</div>
 	</div>
-	<button id="button">1111</button>
-	<script src="task22.js"></script>
+	<button id="DLR">前序遍历</button>
+	<button id="LDR">中序遍历</button>
+	<button id="LRD">后序遍历</button>
+	<script>
+		function $(id) {
+    return document.getElementById(id);
+}
+
+function Tree(element) {
+    this._root = element;
+}
+
+Tree.prototype = {
+    constructor: Tree,
+    traveseDLR: function (callback) {
+        (function recurse(current) {
+                callback.call(this, current);
+            if (current.children.length >= 1) {
+                recurse(current.children[0]);
+            }
+            if (current.children.length >= 2) {
+                recurse(current.children[1]);
+            }
+        })(this._root);
+    },
+    traveseLDR: function (callback) {
+        (function recurse(current) {
+            if (current.children.length >= 1) {
+                recurse(current.children[0]);
+            }
+            callback.call(this, current);
+            if (current.children.length >= 2) {
+                recurse(current.children[1]);
+            }
+        })(this._root);
+    },
+    traveseLRD: function (callback) {
+        (function recurse(current) {
+            if (current.children.length >= 1) {
+                recurse(current.children[0]);
+            }
+            if (current.children.length >= 2) {
+                recurse(current.children[1]);
+            }
+            callback.call(this, current);
+        })(this._root);
+    }
+}
+
+tree = new Tree($("a"));
+
+
+
+$("DLR").addEventListener("click", function () {
+    tree.traveseDLR(function (element) {
+        element.style.background = "#0cc";
+        setTimeout(function () {
+            element.style.background = "#fff";
+        }, 500)
+    });
+});
+
+$("LDR").addEventListener("click", function () {
+    tree.traveseLDR(function (element) {
+        console.log(element.id);
+        element.style.background = "#0cc";
+
+    });
+});
+
+$("LRD").addEventListener("click", function () {
+    tree.traveseLRD(function (element) {
+        console.log(element.id);
+        element.style.background = "#0cc";
+    });
+});
+
+console.log(tree);
+	</script>
 
 </body>
 
