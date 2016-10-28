@@ -72,85 +72,12 @@
 			</div>
 		</div>
 	</div>
-	<button id="DLR">前序遍历</button>
-	<button id="LDR">中序遍历</button>
-	<button id="LRD">后序遍历</button>
-	<script>
-		function $(id) {
-    return document.getElementById(id);
-}
 
-function Tree(element) {
-    this._root = element;
-}
+	<input id="DLR" type="button" value="前序遍历">
+	<input id="LDR" type="button" value="中序遍历">
+	<input id="LRD" type="button" value="后序遍历">
 
-Tree.prototype = {
-    constructor: Tree,
-    traveseDLR: function (callback) {
-        (function recurse(current) {
-                callback.call(this, current);
-            if (current.children.length >= 1) {
-                recurse(current.children[0]);
-            }
-            if (current.children.length >= 2) {
-                recurse(current.children[1]);
-            }
-        })(this._root);
-    },
-    traveseLDR: function (callback) {
-        (function recurse(current) {
-            if (current.children.length >= 1) {
-                recurse(current.children[0]);
-            }
-            callback.call(this, current);
-            if (current.children.length >= 2) {
-                recurse(current.children[1]);
-            }
-        })(this._root);
-    },
-    traveseLRD: function (callback) {
-        (function recurse(current) {
-            if (current.children.length >= 1) {
-                recurse(current.children[0]);
-            }
-            if (current.children.length >= 2) {
-                recurse(current.children[1]);
-            }
-            callback.call(this, current);
-        })(this._root);
-    }
-}
-
-tree = new Tree($("a"));
-
-
-
-$("DLR").addEventListener("click", function () {
-    tree.traveseDLR(function (element) {
-        element.style.background = "#0cc";
-        setTimeout(function () {
-            element.style.background = "#fff";
-        }, 500)
-    });
-});
-
-$("LDR").addEventListener("click", function () {
-    tree.traveseLDR(function (element) {
-        console.log(element.id);
-        element.style.background = "#0cc";
-
-    });
-});
-
-$("LRD").addEventListener("click", function () {
-    tree.traveseLRD(function (element) {
-        console.log(element.id);
-        element.style.background = "#0cc";
-    });
-});
-
-console.log(tree);
-	</script>
+	<script src="task22.js"></script>
 
 </body>
 
