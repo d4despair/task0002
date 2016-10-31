@@ -1,0 +1,177 @@
+<!DOCTYPE>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>task23</title>
+	<style>
+		#super {
+			width: 200px;
+		}
+		
+		div {
+			display: block;
+			flex: 1;
+			padding: 5px 0 0 20px;
+			justify-content: center;
+			background-color: #fff;
+			flex-wrap: wrap;
+		}
+		
+		.arrow-right {
+			color: #0cc;
+		}
+		
+		.arrow-right:before {
+			content: "";
+			display: inline-block;
+			width: 0px;
+			height: 0px;
+			padding: 0px;
+			margin-right: 8px;
+			vertical-align: middle;
+			border: 4px solid transparent;
+			border-left: 4px solid #000;
+		}
+
+		.arrow-top * {
+			display: none;
+		}
+		
+		.arrow-top {
+			color: #0cc;
+		}
+		
+		.arrow-top:before {
+			content: "";
+			display: inline-block;
+			width: 0px;
+			height: 0px;
+			padding: 0px;
+			margin-right: 8px;
+			vertical-align: middle;
+			border: 4px solid transparent;
+			border-top: 4px solid #000;
+		}
+		
+		.none {
+			color: #fcc;
+		}
+		
+		.none:before {
+			content: "";
+			display: inline-block;
+			width: 0px;
+			height: 0px;
+			padding: 0px;
+			margin-right: 8px;
+			vertical-align: middle;
+			border: 4px solid transparent;
+		}
+		
+		.active * {
+			display: none;
+		}
+		
+		.active:before {
+			content: "";
+			display: inline-block;
+			width: 0px;
+			height: 0px;
+			padding: 0px;
+			margin-right: 8px;
+			vertical-align: middle;
+			border: 4px solid transparent;
+			border-left: 4px solid #000;
+		}
+		
+		.result {
+			background-color: #fcc;
+		}
+		
+		.travesing {
+			background-color: #0cc;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="super" class="black">
+		Super
+		<div id="cat" class="white">
+			Cat
+			<div id="apple" class="black">
+				Apple
+				<div id="pearl" class="white">
+					Pearl
+				</div>
+				<div id="pig" class="white">
+					Pig
+				</div>
+				<div id="cola" class="white">
+					Cola
+				</div>
+				<div id="soccer" class="white">
+					Soccer
+				</div>
+			</div>
+			<div id="phone" class="black">
+				Phone
+			</div>
+			<div id="nothing">
+				Nothing
+				<div id="book" class="black">
+					Book
+				</div>
+				<div id="school" class="white">
+					School
+				</div>
+			</div>
+		</div>
+		<div id="node" class="white">
+			Node
+			<div id="human" class="black">
+				Human
+				<div id="code" class="white">
+					Code
+				</div>
+				<div id="operate" class="white">
+					Operate
+				</div>
+				<div id="man" class="white">
+					Man
+				</div>
+			</div>
+		</div>
+		<div id="program">
+			Program
+			<div id="bement" class="white">
+				Bement
+				<div id="cat" class="white">
+					Cat
+				</div>
+			</div>
+			<div id="grass" class="white">
+				Grass
+			</div>
+		</div>
+		<div id="fish">
+			Fish
+		</div>
+	</div>
+
+	<input id="DF" type="button" value="前序遍历">
+	<input id="BF" type="button" value="后序遍历">
+	<input id="searchText" type="text" placeholder="输入要查询的字">
+	<input id="searchDF" type="button" value="前序查询">
+	<input id="searchBF" type="button" value="后序查询">
+	<input id="addText" type="text" placeholder="输入要添加的字">
+	<input id="add" type="button" value="点击添加">
+	<input id="delete" type="button" value="点击删除">
+
+
+	<script src="task25.js"></script>
+
+</body>
+
+</html>
