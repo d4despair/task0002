@@ -27,6 +27,20 @@
 		.travesing {
 			background: #0cc;
 		}
+		
+		li {
+			list-style-type: disc;
+		}
+		
+		.test {
+			list-style-type: circle;
+		}
+		
+		.none {
+			list-style-type: none;
+		}
+		
+		
 	</style>
 </head>
 
@@ -104,10 +118,23 @@
 	<input id="delete" type="button" value="点击删除">
 
 	<ul id="ul">
-		test
-		<li>hello</li>
-		<li>world</li>
+		<li>test
+			<ul>
+				<li>hello
+					<ul>
+						<li>hello</li>
+						<li>world</li>
+					</ul>
+				</li>
+				<li>world</li>
+			</ul>
+		</li>
+
 	</ul>
+	<label for="test" accesskey="G">test</label>
+	<input id="test" type="text" value="测试">
+
+	
 
 	<script src="task23.js"></script>
 

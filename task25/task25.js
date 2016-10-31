@@ -128,17 +128,18 @@ Tree.prototype = {
         });
         document.addEventListener("click", function (event) {
             if (event.target.nodeName == "DIV") {
-
                 if (that.active != null) {
-                    that.active.className = that.active.className.replace(/active/i, "");
+                    that.active.className = that.active.className.replace(/acitve/, "").trim();
+                    that.active.style.backgroundColor = "";
                 }
-                if (that.active == event.target || /active/.test(event.target.className)) {
-                    event.target.className = event.target.className.replace(/active/, "");
+                if (that.active == event.target || /arrow-right/.test(event.target.className)) {
+                    event.target.className = event.target.className.replace(/arrow-right/, "arrow-top").trim();
                     that.active = null;
                     return;
                 }
                 that.active = event.target;
-                that.active.className += " active";
+                event.target.className = event.target.className.replace(/arrow-top/, "arrow-right acitve").trim();
+                that.active.style.backgroundColor = "#fcc";
 
 
                 /*

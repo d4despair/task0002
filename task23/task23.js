@@ -163,17 +163,37 @@ var tree = new Tree($("super"));
 var flag = 0;
 
 $("ul").addEventListener("click", function () {
+    console.log(event.target.nodeType);
+    var target = event.target;
+    console.log(target.nodeName);
+    if (target.nodeName == "LI") {
+        if (target.children[0].style.display == "") {
+            for (var i = 0; i < target.children.length; i++) {
+                target.children[i].style.display = "none";
+                target.className = "test";
+            }
 
-    if (flag == 0) {
-        for (var i = 0; i < $("ul").children.length; i++) {
-            $("ul").children[i].style.display = "none";
+            flag = 0;
+        } else {
+            for (var i = 0; i < $("ul").children.length; i++) {
+                target.children[i].style.display = "";
+                target.className = "";
+            }
+            flag = 1;
         }
-
-        flag = 1;
-    } else {
-        for (var i = 0; i < $("ul").children.length; i++) {
-            $("ul").children[i].style.display = "list-item";
-        }
-        flag = 0;
     }
+    /*
+        if (flag == 0) {
+            for (var i = 0; i < $("ul").children.length; i++) {
+                $("ul").children[i].style.display = "none";
+            }
+    
+            flag = 1;
+        } else {
+            for (var i = 0; i < $("ul").children.length; i++) {
+                $("ul").children[i].style.display = "list-item";
+            }
+            flag = 0;
+        }
+        */
 })
