@@ -50,7 +50,12 @@ Tree.prototype = {
     addArrow: function () {
         this.travese(function (element) {
             if (element.children.length > 0) {
-                element.className = "arrow-top";
+                if (!/arrow-top/.test(element.className) && !/arrow-right/.test(element.className)) {
+                    element.className += " arrow-right";
+                }
+                if (/none/.test(element.className)) {
+                    element.className = element.className.replace(/none/, '').trim();
+                }
             } else {
                 element.className = "none";
             }
@@ -66,9 +71,9 @@ Tree.prototype = {
             var result = [];//用于标记匹配查询的结果
             var timer = setInterval(function () {
                 if (i < list.length) {
-                    list[i].className = "travesing";
+                    list[i].className += " travesing";
                     if (i - 1 >= 0 && result.every(function (e) { return (e != (i - 1)); })) {
-                        list[i - 1].className = "";
+                        list[i - 1].className = list[i - 1].className.replace(/travesing/, "").trim();
                     }
                     if (reg.test(list[i].innerText)) {
                         list[i].className = "result";
@@ -76,7 +81,7 @@ Tree.prototype = {
                     }
                 } else {
                     clearInterval(timer);
-                    list[i - 1].className = "";
+                    list[i - 1].className = list[i - 1].className.replace(/travesing/, "").trim();
                 }
                 i++;
             }, 500)
@@ -91,15 +96,15 @@ Tree.prototype = {
         var that = this;
         var timer = null;
         that.flag = 1;
-        list[0].className = "travesing";
+        list[0].className += " travesing";
         timer = setInterval(function () {
             //实际上下面的不等式是以i=1为初始值
             if (i++ < list.length) {
                 console.log(list[i - 1].id);
-                list[i - 1].className = "";
+                list[i - 1].className = list[i - 1].className.replace(/travesing/, "").trim();
                 //防止最后一次错误
                 if (i < list.length) {
-                    list[i].className = "travesing";
+                    list[i].className += " travesing";
                 }
                 console.log(i);
             } else {
