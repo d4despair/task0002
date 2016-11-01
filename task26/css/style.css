@@ -29,25 +29,88 @@ div{
 .first{
     width: 250px;
     height: 250px;
-    margin-left: -125px;
-    margin-top: -125px;
+    margin-left: -126px;
+    margin-top: -126px;
 }
 
 .second{
     width: 350px;
     height: 350px;
-    margin-left: -175px;
-    margin-top: -175px;
+    margin-left: -176px;
+    margin-top: -176px;
 }
 .third{
     width: 450px;
     height: 450px;
-    margin-left: -225px;
-    margin-top: -225px;
+    margin-left: -226px;
+    margin-top: -226px;
 }
 .fouth{
     width: 550px;
     height: 550px;
-    margin-left: -275px;
-    margin-top: -275px;
+    margin-left: -276px;
+    margin-top: -276px;
+}
+
+.spaceship{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    height: 60px;
+    width: 20px;
+    background: #fff;
+    animation: myfirst 5s linear infinite;
+    animation-play-state: paused;
+}
+
+.ship1{
+    margin-left: -136px;
+    margin-top:-30px;
+    transform-origin: 136px;
+    transform: rotate(0deg);
+}
+
+.ship2{
+    margin-left: -186px;
+    margin-top:-30px;
+    transform-origin: 186px;
+    transform: rotate(0deg);
+}
+
+.ship3{
+    margin-left: -236px;
+    margin-top:-30px;
+    transform-origin: 236px;
+    transform: rotate(0deg);
+}
+
+.ship4{
+    margin-left: -286px;
+    margin-top:-30px;
+    transform-origin: 286px;
+    transform: rotate(0deg);
+}
+
+@keyframes myfirst
+{
+from {transform: rotate(0deg);}
+to {transform: rotate(360deg);}
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+from {transform: rotate(0deg);}
+to {transform: rotate(360deg);}
+}
+
+@-webkit-keyframes myfirst /* Safari 和 Chrome */
+{
+from {transform: rotate(0deg);}
+to {transform: rotate(360deg);}
+}
+
+@-o-keyframes myfirst /* Opera */
+{
+from {transform: rotate(0deg);}
+to {transform: rotate(360deg);}
 }
