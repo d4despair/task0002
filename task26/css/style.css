@@ -1,0 +1,53 @@
+body{
+    background-color: #000;
+}
+
+div{
+    color: yellow;
+}
+
+.planet{
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    left: 50%;
+    top: 50%;
+    margin-left: -75px;
+    margin-top: -75px;
+    border-radius: 50%;
+    background-color: #cf0;
+}
+
+.round{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border: 1px solid #ffc;
+    border-radius: 50%;
+}
+
+.first{
+    width: 250px;
+    height: 250px;
+    margin-left: -125px;
+    margin-top: -125px;
+}
+
+.second{
+    width: 350px;
+    height: 350px;
+    margin-left: -175px;
+    margin-top: -175px;
+}
+.third{
+    width: 450px;
+    height: 450px;
+    margin-left: -225px;
+    margin-top: -225px;
+}
+.fouth{
+    width: 550px;
+    height: 550px;
+    margin-left: -275px;
+    margin-top: -275px;
+}
