@@ -12,96 +12,70 @@ function addEvent(ele, event, handler) {
     }
 }
 
-
-var stop = document.getElementById("stop");
-stop.addEventListener("click", function () {
-    document.getElementById("ship1").style.animationPlayState = "paused";
-
-}, false)
-
-
 var fuel = 100;
-
-var start = document.getElementById("start");
-start.addEventListener("click", function () {
-    document.getElementById("ship1").style.animationPlayState = "running";
-    var timer = setInterval(function () {
-        if (fuel <= 0) {
-            $("ship1").style.animationPlayState = "paused";
-            clearInterval(timer);
-            var timer2 = setInterval(function () {
-                console.log(fuel);
-                if (fuel >= 100) {
-                    clearInterval(timer2);
-                }
-                fuel += 3;
-                $("test").innerHTML = fuel + "%";
-            }, 200);
-        }
-        console.log(fuel);
-        fuel -= 5;
-        $("test").innerHTML = fuel + "%";
-    }, 200);
-}, false)
-
-$("launch1").addEventListener("click", function () {
-    if (!$("ship1")) {
-        var ship1 = document.createElement("div");
-        ship1.id = "ship1";
-        ship1.className = "ship1 spaceship";
-        $("universe").appendChild(ship1);
-    }
-}, false);
-
-$("destroy").addEventListener("click", function () {
-    $("universe").remsoveChild($("ship1"));
-})
 
 function Spaceship(num) {
     this._id = num;
-    this.id = $("ship" + num);
+    this.ship = $("ship" + num);
     this.state = "STOP";
     this.fuel = 100;
     this.consumeRate = 5;
     this.chargeRate = 2;
     this.speed = 5;
     this.rate = 1000 / this.speed;
+    this.animaition = null;
 }
 
 Spaceship.prototype = {
     launch: function () {
+        if (!this.ship) {
+            this.ship = document.createElement("div");
+            this.ship.id = "ship" + this._id;
+            this.ship.className = "spaceship" + " ship" + this._id;
+            var test = document.createElement("div");
+            test.id = "test";
+            test.innerHTML = "100%";
+            this.ship.appendChild(test);
+            $("universe").appendChild(this.ship);
+        } else {
+            console.log("already launched");
+        }
     },
     start: function () {
         var that = this;
-        this.id.style.animationPlayState = "running";
-        this.state = "RUN";
-        var running = setInterval(function () {
+        that.ship.style.animationPlayState = "running";
+        that.state = "RUN";
+        clearInterval(that.animaition);
+        that.animaition = setInterval(function () {
             console.log(that.fuel);
             $("test").innerHTML = that.fuel + "%";
             $("test").style.width = that.fuel + "%";
             that.fuel -= that.consumeRate;
             if (that.fuel <= 0) {
                 that.fuel = 0;
-                clearInterval(running);
+                clearInterval(that.animaition);
+                that.animaition = null;
                 console.log("run out");
                 $("test").innerHTML = that.fuel + "%";
                 $("test").style.width = that.fuel + "%";
                 that.stop();
             }
-        }, this.rate)
+        }, that.rate)
     },
     stop: function () {
         var that = this;
-        this.id.style.animationPlayState = "paused";
-        this.state = "STOP";
-        var recharge = setInterval(function () {
+        that.ship.style.animationPlayState = "paused";
+        that.state = "STOP";
+        clearInterval(that.animaition);
+        that.animaition = setInterval(function () {
             console.log(that.fuel);
             $("test").innerHTML = that.fuel + "%";
             $("test").style.width = that.fuel + "%";
             that.fuel += that.chargeRate;
             if (that.fuel >= 100) {
                 that.fuel = 100;
-                clearInterval(recharge);
+                clearInterval(that.animaition);
+                that.animaition = null;
                 console.log(that.fuel);
                 $("test").innerHTML = that.fuel + "%";
                 $("test").style.width = that.fuel + "%";
@@ -109,12 +83,26 @@ Spaceship.prototype = {
         }, this.rate)
     },
     destroy: function () {
+        this.ship.parentNode.removeChild(this.ship);
+    },
+    init: function () {
+        var that = this;
+        addEvent(document, "click", function (event) {
+            var target = event.target;
+            switch (target.id) {
+                case "launch": that.launch();
+                    break;
+                case "start": that.start();
+                    break;
+                case "stop": that.stop();
+                    break;
+                case "destroy": that.destroy();
+                    break;
+            }
+        })
     }
 }
-var ship1 = new Spaceship(1);
 
-var ship2 = new Spaceship(2);
-console.log(ship2.id);
-ship2.start();
-console.log(ship1.state);
-console.log(ship2.state);
+var ship1 = new Spaceship(2);
+
+ship1.init();

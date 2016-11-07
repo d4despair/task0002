@@ -56,24 +56,24 @@ div{
     position: fixed;
     left: 50%;
     top: 50%;
-    height: 60px;
-    width: 20px;
+    height: 20px;
+    width: 60px;
     background: #fff;
     animation: myfirst 5s linear infinite;
     animation-play-state: paused;
 }
 
 .ship1{
-    margin-left: -136px;
-    margin-top:-30px;
-    transform-origin: 136px;
+    margin-left: -30px;
+    margin-top:-136px;
+    transform-origin: center 136px;
     transform: rotate(0deg);
 }
 
 .ship2{
-    margin-left: -186px;
-    margin-top:-30px;
-    transform-origin: 186px;
+    margin-left: -30px;
+    margin-top:-186px;
+    transform-origin: center 186px;
     transform: rotate(0deg);
 }
 
@@ -113,4 +113,11 @@ to {transform: rotate(360deg);}
 {
 from {transform: rotate(0deg);}
 to {transform: rotate(360deg);}
+}
+
+#test{
+    background:#0f0;
+    width:100%;
+    height:100%;
+    font-weight: bold;
 }
