@@ -121,3 +121,16 @@ to {transform: rotate(360deg);}
     height:100%;
     font-weight: bold;
 }
+
+#drag{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 50px;
+    background:#0f0;
+}
+
+#drag:hover{
+cursor: move;
+}
