@@ -109,47 +109,47 @@ ship1.init();
 
 (function () {
     var flag = 0;
-    var x1 = 0;
-    var y1 = 0;
-    var start = { x: new Number, y: new Number };
-    var moving = { x: new Number, y: new Number };
+    var start = {};
 
-    addEvent($("drag"), "mousedown", function () {
-        var target = event.target;
+
+
+    addEvent($("drag"), "mousedown", function (e) {
+        var target = e.target;
         if (!flag) {
             flag = 1;
-            x1 = event.clientX;
-            y1 = event.clientY;
-            left1 = target.style.left.replace("px", "");
-            top1 = target.style.top.replace("px", "");
+            start.x = e.clientX;
+            start.y = e.clientY;
+            start.left = target.style.left.replace("px", "");
+            start.top = target.style.top.replace("px", "");
             console.log("drag!!!");
         }
-        console.log($("drag").offsetHeight);
-        console.log($("drag").offsetWidth);
     });
 
-    addEvent(document, "mousemove", function () {
+    addEvent(document, "mousemove", function (e) {
         var target = $("drag");
         if (flag) {
-            var x = event.clientX;
-            var y = event.clientY;
-            var width = target.style.width;
-            var height = target.style.height;
-            var a = x1 - left1;
-            var b = y1 - top1;
+            var x = e.clientX;
+            var y = e.clientY;
+            //修正拖动对象的坐标位置
+            var a = start.x - start.left;
+            var b = start.y - start.top;
+            var leftBoundary = 0;
+            var topBoundary = 0;
+            var rightBoundary = window.innerWidth - $("drag").offsetWidth;
+            var bottomBoundary = window.innerHeight - $("drag").offsetHeight;
             target.style.left = x - a;
             target.style.top = y - b;
-            if (x - a < 0) {
-                target.style.left = 0;
+            if (x - a < leftBoundary) {
+                target.style.left = leftBoundary;
             }
-            if (y - b < 0) {
-                target.style.top = 0;
+            if (y - b < topBoundary) {
+                target.style.top = topBoundary;
             }
-            if (x - a > (window.innerWidth - $("drag").offsetWidth)) {
-                target.style.left = window.innerWidth - $("drag").offsetWidth;
+            if (x - a > rightBoundary) {
+                target.style.left = rightBoundary;
             }
-            if (y - b > (window.innerHeight - $("drag").offsetHeight)) {
-                target.style.top = window.innerHeight - $("drag").offsetHeight;
+            if (y - b > bottomBoundary) {
+                target.style.top = bottomBoundary;
             }
         }
     })
