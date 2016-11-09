@@ -2,10 +2,6 @@ body{
     background-color: #000;
 }
 
-div{
-    color: yellow;
-}
-
 .planet{
     position: absolute;
     width: 150px;
@@ -115,22 +111,61 @@ from {transform: rotate(0deg);}
 to {transform: rotate(360deg);}
 }
 
-#test{
-    background:#0f0;
-    width:100%;
-    height:100%;
-    font-weight: bold;
+table{
+    background-color: rgba(255,255 , 255, 0.2);
 }
 
-#drag{
+table p{
+    display: inline;
+}
+
+.dragable-parent{
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100px;
-    height: 50px;
-    background:#0f0;
 }
 
-#drag:hover{
-cursor: move;
+.dragable{
+    cursor: move;
+    background-color: #00f;
+}
+
+#control{
+    left: 0;
+    top: 0;
+    color: #fff;
+}
+
+#control-title{
+    width: 350px;
+    height: 20px;
+    padding: 5px;
+}
+
+#control-list{
+    padding: 5px;
+}
+
+#control-list input{
+    margin-right: 5px;
+}
+
+#log{
+    width: 400px;
+    height: 200px;
+    color: #fff;
+    background-color: rgba(255,255 , 255, 0.2);
+}
+
+#log-title{
+    width: 390px;
+    height: 20px;
+    padding: 5px;
+}
+
+#log-content{
+    margin: 0;
+    padding: 5px;
+    width: 390px;
+    height: 160px;
+    line-height: 20px;
+    overflow: auto;
 }

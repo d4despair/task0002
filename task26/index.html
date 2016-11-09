@@ -17,19 +17,30 @@
 
 		<div id="ship3" class="ship3 spaceship"></div>
 		<div id="ship4" class="ship4 spaceship"></div>
-		<div id="drag"></div>
+
 	</div>
 	<!--
+		<div id="drag">
+		</div>
 	<input id="launch" type="button" value="launch">
 	<input id="start" type="button" value="start">
 	<input id="stop" type="button" value="stop">
 	<input id="destroy" type="button" value="destroy">
 	-->
 
+	<div id="control" class="dragable-parent">
+		<div id="control-title" class="dragable">宇宙控制台</div>
+		<div id="control-list"></div>
+		<div><input id="createNewSpaceship" type="button" value="新的飞船起飞"></div>
+	</div>
+	<div id="log" style="bottom:0px;right:0px" class="dragable-parent">
+		<div id="log-title" class="dragable">宇宙日记</div>
+		<div id="log-content"></div>
+	</div>
 
-
-	<input type="button" value="Run" id="run" />
 	<script src="./js/main.js"></script>
+	<script src="./js/commander.js"></script>
+	<script src="./js/spaceship.js"></script>
 </body>
 
 </html>
