@@ -1,0 +1,63 @@
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  width: 1240px;
+  margin: 20px auto;
+  padding-right: 10px;
+}
+
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.boxbot {
+  position: relative;
+}
+
+.boxbot-box {
+  width: 37px;
+  height: 37px;
+  box-sizing: border-box;
+  transition-property: left, top, transform;
+  transition-duration: .25s;
+}
+
+.boxbot-bot {
+  position: absolute;
+  background-color: #f00;
+}
+
+.boxbot-head {
+    width: 37px;
+    height: 5px;
+    background: #00f;
+}
+
+.boxbot-map {
+  border-collapse: collapse;
+  float: left;
+}
+
+td.boxbot-box {
+  border: 1px solid #bdc3c7;
+  padding: 5px;
+  font-size: 12px;
+}
+
+.boxbot-box[data-type="y-axis"],
+.boxbot-box[data-type="x-axis"] {
+  border: 0;
+}
+
+.boxbot-box[data-type="y-axis"] {
+  text-align: right;
+}
+
+.boxbot-box[data-type="x-axis"] {
+  text-align: center;
+}
+
+.boxbot-box[data-type="wall"] {
+  background-color: #bdc3c7;
+}
