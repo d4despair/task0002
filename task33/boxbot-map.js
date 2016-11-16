@@ -1,6 +1,8 @@
-
 var BoxbotMap = function (selector) {
     this.element = document.querySelector(selector);
+    this.width = this.element.clientWidth;
+    this.height = this.element.clientHeight;
+    this.boundary = {};
 }
 
 BoxbotMap.prototype.create = function (rows, columns) {
@@ -28,34 +30,12 @@ BoxbotMap.prototype.create = function (rows, columns) {
     this.element.innerHTML = html;
 }
 
-var a = new BoxbotMap('.boxbot-map');
-a.create(10, 10);
 
-
-var BoxbotBot = function (selector) {
-    this.element = document.querySelector(selector);
-    this.init();
-}
-
-BoxbotBot.prototype.init = function () {
-    this.element.style.left = this.element.clientWidth + 'px';
-    this.element.style.top = this.element.clientHeight + 'px';
-    this.element.style.transform = 'rotate(0deg)';
-}
-
-BoxbotBot.prototype.forward = function () {
-    var left = parseInt(this.element.style.left.replace('px',''));
-    if (left < 370){
-    this.element.style.left = left + this.element.clientWidth + 'px';
-    }    
-}
-
-
-
-var b = new BoxbotBot('.boxbot-bot');
+/*
 
 (function(bot){
     document.querySelector('.command-forward').addEventListener('click',function(event){
         bot.forward();
     },false);
 })(b);
+*/
