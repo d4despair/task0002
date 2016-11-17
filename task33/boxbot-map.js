@@ -1,8 +1,5 @@
 var BoxbotMap = function (selector) {
     this.element = document.querySelector(selector);
-    this.width = this.element.clientWidth;
-    this.height = this.element.clientHeight;
-    this.boundary = {};
 }
 
 BoxbotMap.prototype.create = function (rows, columns) {
@@ -11,7 +8,7 @@ BoxbotMap.prototype.create = function (rows, columns) {
         html += '<tr>';
         for (var x = 0; x <= columns; x++) {
             if (x == 0 && y == 0) {
-                html += '<td></td>';
+                html += '<td id="first-box"></td>';
             } else {
                 if (y == 0) {
                     html += '<td class="boxbot-box" data-type="x-axis">' + x + '</td>';
@@ -30,9 +27,12 @@ BoxbotMap.prototype.create = function (rows, columns) {
     this.element.innerHTML = html;
 }
 
+BoxbotMap.prototype.getBoundary = function(){
+    this.boundary = {};
+}
+
 
 /*
-
 (function(bot){
     document.querySelector('.command-forward').addEventListener('click',function(event){
         bot.forward();
