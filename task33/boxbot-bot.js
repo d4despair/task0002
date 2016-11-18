@@ -24,7 +24,6 @@ BoxbotBot.prototype.forward = function () {
 BoxbotBot.prototype.turn = function (direction) {
     var CurrentAngle = this.getCurrentAngle();
     console.log(CurrentAngle);
-
     var whichWay = {
         right: 90,
         left: -90,
@@ -33,7 +32,8 @@ BoxbotBot.prototype.turn = function (direction) {
     this.element.style.transform = 'rotate(' + (CurrentAngle + whichWay[direction]) + 'deg)'
 }
 
-BoxbotBot.prototype.go = function () {
+BoxbotBot.prototype.go = function (mapBoundary) {
+    console.log(mapBoundary);
     var currentDirection = this.getCurrentDirection();
     var currentPosition = this.getCurrentPositon();
     var distance = this.element.clientWidth;
@@ -43,8 +43,10 @@ BoxbotBot.prototype.go = function () {
         180: [0, distance],
         270: [-distance, 0]
     }
-    this.element.style.left = currentPosition[0] + whichWay[currentDirection][0];
-    this.element.style.top = currentPosition[1] + whichWay[currentDirection][1];
+    if (this.hasWayToGO(currentDirection, currentPosition, mapBoundary)) {
+        this.element.style.left = currentPosition[0] + whichWay[currentDirection][0] + 'px';
+        this.element.style.top = currentPosition[1] + whichWay[currentDirection][1] + 'px';
+    }
 }
 
 BoxbotBot.prototype.getCurrentAngle = function () {
@@ -62,10 +64,17 @@ BoxbotBot.prototype.getCurrentPositon = function () {
     return [x, y]
 }
 
-
-/**
- * @param {string} command
- */
-BoxbotBot.prototype.commandDecoder = function (command) {
-
+BoxbotBot.prototype.hasWayToGO = function (direction, position, mapBoundary) {
+    console.log(position);
+    switch (direction) {
+        case NORTH: if (position[1] > mapBoundary[NORTH]) { return true; }
+            break;
+        case SOUTH: if (position[1] < mapBoundary[SOUTH]) { return true; }
+            break;
+        case WEST: if (position[0] > mapBoundary[WEST]) { return true; }
+            break;
+        case EAST: if (position[0] < mapBoundary[EAST]) { return true; }
+            break;
+        default: return false;
+    }
 }
