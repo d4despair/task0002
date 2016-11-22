@@ -2,6 +2,7 @@ var Application = function () {
     this.boxbot = new Boxbot();
     this.$text = document.querySelector('#command-text');
     this.$confirm = document.querySelector('#confirm');
+    this.$test = document.querySelector('#test');
 
     this.init();
 }
@@ -9,6 +10,7 @@ var Application = function () {
 Application.prototype.init = function () {
     document.addEventListener('keydown', this.hotkey.bind(this));
     this.$confirm.addEventListener('click', this.confirm.bind(this));
+    this.$test.addEventListener('click', function(){this.boxbot.bot.turn(270)});
 }
 
 Application.prototype.confirm = function () {

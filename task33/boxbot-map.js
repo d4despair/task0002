@@ -2,6 +2,7 @@ var BoxbotMap = function (selector) {
     this.element = document.querySelector(selector);
 }
 
+
 BoxbotMap.prototype.create = function (rows, columns) {
     var html = '';
     for (var y = 0; y <= rows; y++) {
@@ -27,7 +28,7 @@ BoxbotMap.prototype.create = function (rows, columns) {
     this.element.innerHTML = html;
 }
 
-BoxbotMap.prototype.getBoundary = function(){
+BoxbotMap.prototype.getBoundary = function () {
     this.boundary = {};
 }
 

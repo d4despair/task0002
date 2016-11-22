@@ -1,8 +1,3 @@
-var NORTH = 0
-var EAST = 90
-var SOUTH = 180
-var WEST = 270
-
 var BoxbotBot = function (selector) {
     this.element = document.querySelector(selector);
     this.init();
@@ -14,39 +9,22 @@ BoxbotBot.prototype.init = function () {
     this.element.style.transform = 'rotate(0deg)';
 }
 
-BoxbotBot.prototype.forward = function () {
-    var left = parseInt(this.element.style.left.replace('px', ''));
-    if (left < 370) {
-        this.element.style.left = left + this.element.clientWidth + 'px';
-    }
-}
-
+/**
+ * @param {int} direction 用角度代表方向，0 = TOP 90 = RIGHT 180 = BOTTOM 270 = LEFT
+ */
 BoxbotBot.prototype.turn = function (direction) {
-    var CurrentAngle = this.getCurrentAngle();
-    console.log(CurrentAngle);
-    var whichWay = {
-        right: 90,
-        left: -90,
-        back: 180
+    var LEFT = 270
+    if (direction == LEFT) {
+        direction = -90;
     }
-    this.element.style.transform = 'rotate(' + (CurrentAngle + whichWay[direction]) + 'deg)'
+    this.element.style.transform = 'rotate(' + (this.getCurrentAngle() + direction) + 'deg)';
 }
 
-BoxbotBot.prototype.go = function (mapBoundary) {
-    console.log(mapBoundary);
+BoxbotBot.prototype.rotate = function (direction) {
+    var currentAngle = this.getCurrentAngle();
     var currentDirection = this.getCurrentDirection();
-    var currentPosition = this.getCurrentPositon();
-    var distance = this.element.clientWidth;
-    var whichWay = {
-        0: [0, -distance],
-        90: [distance, 0],
-        180: [0, distance],
-        270: [-distance, 0]
-    }
-    if (this.hasWayToGO(currentDirection, currentPosition, mapBoundary)) {
-        this.element.style.left = currentPosition[0] + whichWay[currentDirection][0] + 'px';
-        this.element.style.top = currentPosition[1] + whichWay[currentDirection][1] + 'px';
-    }
+    var differAngle = (direction - currentDirection) % 360;
+    this.element.style.transform = 'rotate(' + (currentAngle + differAngle) + 'deg)';
 }
 
 BoxbotBot.prototype.getCurrentAngle = function () {
@@ -62,19 +40,4 @@ BoxbotBot.prototype.getCurrentPositon = function () {
     var x = parseInt(this.element.style.left.replace('px', ''));
     var y = parseInt(this.element.style.top.replace('px', ''));
     return [x, y]
-}
-
-BoxbotBot.prototype.hasWayToGO = function (direction, position, mapBoundary) {
-    console.log(position);
-    switch (direction) {
-        case NORTH: if (position[1] > mapBoundary[NORTH]) { return true; }
-            break;
-        case SOUTH: if (position[1] < mapBoundary[SOUTH]) { return true; }
-            break;
-        case WEST: if (position[0] > mapBoundary[WEST]) { return true; }
-            break;
-        case EAST: if (position[0] < mapBoundary[EAST]) { return true; }
-            break;
-        default: return false;
-    }
 }
